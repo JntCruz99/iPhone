@@ -7,7 +7,6 @@ public class RepodutorMusicial {
 
     private List<Musica> musicas;
 
-    private boolean reproduzindo;
 
     public RepodutorMusicial() {
         this.musicas = new ArrayList<>();
@@ -23,18 +22,28 @@ public class RepodutorMusicial {
                 .toList();
     }
 
-    public void play(String nome){
-         String musica = musicas.stream()
+    public Musica selecionarMusica(String nome){
+        return musicas.stream()
                 .filter(m -> m.getNome().equals(nome))
-                .toString();
-         System.out.println("Tocando Musica" + musica);
+                .findFirst()
+                .orElse(null);
+    }
+
+
+    public void play(String nome){
+         Musica musica = musicas.stream()
+                .filter(m -> m.getNome().equals(nome))
+                 .findFirst()
+                 .orElse(null);
+         System.out.println("Tocando Musica: " + musica.getNome());
     }
 
     public void pausar(String nome){
-        String musica = musicas.stream()
+        Musica musica = musicas.stream()
                 .filter(m -> m.getNome().equals(nome))
-                .toString();
-        System.out.println("Musica" + musica + "Pausada");
+                .findFirst()
+                .orElse(null);
+        System.out.println("Musica Pausada: " + musica.getNome());
     }
 
 
